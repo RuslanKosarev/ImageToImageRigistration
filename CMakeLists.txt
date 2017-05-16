@@ -6,5 +6,8 @@ project(Registration)
 find_package(AGTK REQUIRED)
 include(${AGTK_USE_FILE})
 
-add_executable(MattesMutualInformationImageRegistration MattesMutualInformationImageRegistration.cxx)
-target_link_libraries(MattesMutualInformationImageRegistration ${AGTK_LIBRARIES})
+add_executable(MattesMutualInformationImageTranslationRegistration MattesMutualInformationImageTranslationRegistration.cxx)
+target_link_libraries(MattesMutualInformationImageTranslationRegistration ${AGTK_LIBRARIES})
+
+add_executable(MattesMutualInformationImageEuler3DRegistration MattesMutualInformationImageEuler3DRegistration.cxx)
+target_link_libraries(MattesMutualInformationImageEuler3DRegistration ${AGTK_LIBRARIES})
