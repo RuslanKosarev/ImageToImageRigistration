@@ -52,6 +52,25 @@ protected:
     }
 
     typename OutputImageType::Pointer output = cast->GetOutput();
+
+    // modify direction
+    typename OutputImageType::DirectionType direction = output->GetDirection();
+
+    for (size_t col = 0; col < direction.ColumnDimensions; ++col) {
+      TransformType::InputVectorType vector;
+      for (size_t row = 0; row < direction.RowDimensions; ++row) {
+        vector[row] = direction[row][col];
+      }
+
+      vector = m_Transform->TransformVector(vector);
+      for (size_t row = 0; row < direction.RowDimensions; ++row) {
+        direction[row][col] = vector[row];
+      }
+    }
+
+    output->SetDirection(direction);
+
+    // modify origin
     output->SetOrigin(m_Transform->TransformPoint(output->GetOrigin()));
 
     this->GraftOutput(output);
